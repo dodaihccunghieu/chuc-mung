@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chúc Mừng Sinh Nhật ❤️</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+}
+
+/* Trái tim */
+.heart {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    background: #ff0033;
+    transform: rotate(-45deg);
+    animation: beat 1s infinite;
+    margin-bottom: 30px;
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    background: #ff0033;
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -70px;
+    left: 0;
+}
+
+.heart::after {
+    left: 70px;
+    top: 0;
+}
+
+@keyframes beat {
+    0% { transform: rotate(-45deg) scale(1); }
+    50% { transform: rotate(-45deg) scale(1.15); }
+    100% { transform: rotate(-45deg) scale(1); }
+}
+
+/* Lời chúc */
+.message {
+    font-size: 20px;
+    min-height: 80px;
+    padding: 0 20px;
+    text-shadow: 1px 1px 5px rgba(0,0,0,0.3);
+}
+
+/* Pháo hoa */
+.firework {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: white;
+    animation: explode 1.5s ease-out forwards;
+}
+
+@keyframes explode {
+    0% { transform: scale(0); opacity: 1; }
+    100% { transform: scale(6); opacity: 0; }
+}
+
+/* Mobile đẹp hơn */
+@media (max-width: 600px) {
+    .heart {
+        width: 120px;
+        height: 120px;
+    }
+    .heart::before,
+    .heart::after {
+        width: 120px;
+        height: 120px;
+    }
+    .heart::before { top: -60px; }
+    .heart::after { left: 60px; }
+    .message { font-size: 18px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="heart"></div>
+
+<div class="message" id="message"></div>
+
+<script>
+/* Lời chúc hiện từng dòng */
+const wishes = [
+    "🎉 Chúc nàng sinh nhật 🎉",
+    "💖 Chúc nàng luôn vui vẻ",
+    "🌟 Luôn mạnh khỏe và hạnh phúc",
+	"💖 Chúc nàng luôn xinh đẹp cute phô mai que",
+    "🎂 Tuổi mới thật nhiều thành công",
+    "💌 Luôn có em bên cạnh nàng 💌"
+];
+
+let index = 0;
+const messageDiv = document.getElementById("message");
+
+function showWish() {
+    if (index < wishes.length) {
+        messageDiv.innerHTML = wishes[index];
+        index++;
+    } else {
+        index = 0;
+    }
+}
+
+setInterval(showWish, 2500);
+showWish();
+
+/* Pháo hoa */
+function createFirework() {
+    const firework = document.createElement("div");
+    firework.className = "firework";
+    firework.style.left = Math.random() * window.innerWidth + "px";
+    firework.style.top = Math.random() * window.innerHeight + "px";
+    firework.style.background = `hsl(${Math.random()*360},100%,60%)`;
+    document.body.appendChild(firework);
+
+    setTimeout(() => {
+        firework.remove();
+    }, 1500);
+}
+
+setInterval(createFirework, 300);
+</script>
+
+</body>
+</html>
